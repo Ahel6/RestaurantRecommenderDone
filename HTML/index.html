@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+<head>
+  <title>The Restaurant Recommender</title>
+  <link rel="stylesheet" href="CSS/stylesheet.css" type="text/css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script type="module" src="JS/cookieManager.js"></script>
+  <script type="module" src="JS/formManipulation.js"></script>
+
+  <script src="JS/mapLoader.js"></script>
+  <script src="JS/Forms.js"></script>
+</head>
+
+<body>
+  <!-- autocomplete search box -->
+  <div class="pac-card" id="pac-card">
+    <div>
+      <div id="title">Search</div>
+    </div>
+    <div id="pac-container"><!-- search bar -->
+      <input type="text" id="pac-input" placeholder="Enter a location" />
+    </div>
+  </div>
+
+
+  <!-- div element for the map -->
+  <div id="map"></div>
+  <!-- Login Menu -->
+
+  <aside id="UserMenu">
+    <button type="button" id="LoginMenuButton" class="navButton genericButton">Login</button>
+    <button type="button" id="CreateAccButton" class="navButton genericButton">Create Account</button>
+
+
+    <!-- User Forms/info-->
+    <div id="UserMenuContent">
+      <output id="formError"></output>
+
+
+      <div id="userProfile">
+        <span id="loggedUsername"></span>
+        <span id="userReviewsTotal"></span>
+
+        <div id="userAspects">
+          <label>Your Current Aspect Scores:</label>
+          <div class="aspectRatingBarBackground">
+            <div class="smallAspectRatingBar aspectRatingBar" id="userFoodRating">Food: </div>
+          </div>
+
+          <div class="aspectRatingBarBackground">
+            <div class="smallAspectRatingBar aspectRatingBar" id="userServiceRating">Service: </div>
+          </div>
+
+          <div class="aspectRatingBarBackground">
+            <div class="smallAspectRatingBar aspectRatingBar" id="userDecorRating">Décor: </div>
+          </div>
+
+          <div class="aspectRatingBarBackground">
+            <div class="smallAspectRatingBar aspectRatingBar" id="userAtmosphereRating">Atmosphere: </div>
+          </div>
+
+          <div class=" aspectRatingBarBackground">
+            <div class="smallAspectRatingBar aspectRatingBar" id="userFacilitiesRating">Facilities: </div>
+          </div>
+
+        </div>
+
+        <div id="updatePreferences">
+          <label for="FoodSldrUpdate"
+            data-tooltip="How Important is good food and drink? This includes the quality, variety and value for money.">Food</label>
+          <input type="range" min="1" max="99" value="50" class="slider" id="FoodSldrUpdate"></input>
+
+          <label for="ServiceSldrUpdate"
+            data-tooltip="How Important is good service? 
+            The speed at which food and drink is delivered as well as how the staff communicate and interact with customers.">Service</label>
+          <input type="range" min="1" max="100" value="50" class="slider" id="ServiceSldrUpdate"></input>
+
+          <label for="DecorSldrUpdate"
+            data-tooltip="How important is good Décor? - The interior design and decoration of the restaurant.">Décor</label>
+          <input type="range" min="1" max="100" value="50" class="slider" id="DecorSldrUpdate"></input>
+
+          <label for="AtmosphereSldrUpdate"
+            data-tooltip="How important is good Atmosphere? Including aspects such as music, lighting and table layout.">Atmosphere</label>
+          <input type="range" min="1" max="100" value="50" class="slider" id="AtmosphereSldrUpdate"></input>
+
+          <label for="FacilitiesSldrUpdate"
+            data-tooltip="How Important are facilities? This includes the availability of toilets and seating/accessibility options.">Facilities</label>
+          <input type="range" min="1" max="100" value="50" class="slider" id="FacilitiesSldrUpdate"></input>
+        </div>
+
+        <input type="button" id="updatePrefButton" value="Update Preferences" class="genericButton">
+        <input type="button" id="logoutButton" value="Logout" class="genericButton">
+      </div>
+
+      <form id="loginForm">
+
+        <div class="forms">
+          <label for="emailInput">Email</label>
+          <input type="email" id="LoginEmailInput" class="formInput"></input>
+
+          <label for="passwordInput">Password</label>
+          <input type="password" id="LoginPasswordInput" class="formInput"></input>
+
+          <label for="submitButton">Submit</label>
+          <input type="submit" id="LoginSubmit" value="Login" class="genericButton">
+        </div>
+      </form>
+
+      <!-- Create Account Form-->
+      <form id="CreateAccForm"> <!-- decor, atmosphere, food, service, facilities-->
+        <div class="forms">
+          <label for="nameInputCA">Username</label>
+          <input type="text" id="nameInputCA" class="formInput"></input>
+
+          <label for="emailInputCA">Email</label>
+          <input type="email" id="emailInputCA" class="formInput"></input>
+
+          <label for="passwordInputCA">Password</label>
+          <input type="password" id="passwordInputCA" class="formInput"></input>
+
+          <label for="confirmPasswordInputCA">Confirm Password</label>
+          <input type="password" id="confirmPasswordInputCA" class="formInput"></input>
+
+          <label for="FoodSldr"
+            data-tooltip="How Important is good food and drink? This includes the quality, variety and value for money.">Food</label>
+          <input type="range" min="1" max="99" value="50" class="slider" id="FoodSldr"></input>
+
+          <label for="ServiceSldr"
+            data-tooltip="How Important is good service? 
+            The speed at which food and drink is delivered as well as how the staff communicate and interact with customers.">Service</label>
+          <input type="range" min="1" max="100" value="50" class="slider" id="ServiceSldr"></input>
+
+          <label for="DecorSldr"
+            data-tooltip="How important is good Décor? - The interior design and decoration of the restaurant.">Décor</label>
+          <input type="range" min="1" max="100" value="50" class="slider" id="DecorSldr"></input>
+
+          <label for="AtmosphereSldr"
+            data-tooltip="How important is good Atmosphere? Including aspects such as music, lighting and table layout.">Atmosphere</label>
+          <input type="range" min="1" max="100" value="50" class="slider" id="AtmosphereSldr"></input>
+
+          <label for="FacilitiesSldr"
+            data-tooltip="How Important are facilities? This includes the availability of toilets and seating/accessibility options.">Facilities</label>
+          <input type="range" min="1" max="100" value="50" class="slider" id="FacilitiesSldr"></input>
+
+          <label for="submitButton">Submit</label>
+
+          <input type="submit" id="CreateAccountSubmit" value="Create Account" class="genericButton">
+        </div>
+      </form>
+    </div>
+  </aside>
+
+  <!-- Side Menu -->
+  <aside id="RestaurantAside">
+    <i id="closeSideMenu" class="fa fa-close navButton" style="font-size: 1.25rem;"></i>
+    <div id="loader"></div>
+    <div id="sideMenuContent">
+      <div id="imgInfo">
+        <a id="imageLink" href="">
+          <img id="RestaurantImage">
+        </a>
+        <a id="imgAttribution" href=""></a>
+      </div>
+      <i id="RestaurantName"></i>
+      <i id="RestaurantRating"></i>
+      <div id="Aspects">
+
+        <div class="aspectRatingBarBackground">
+          <div class="bigAspectRatingBar aspectRatingBar" id="FoodRating">Food: </div>
+        </div>
+
+        <div class="aspectRatingBarBackground">
+          <div class="bigAspectRatingBar aspectRatingBar" id="ServiceRating">Service: </div>
+        </div>
+
+        <div class="aspectRatingBarBackground">
+          <div class="bigAspectRatingBar aspectRatingBar" id="DecorRating">Décor: </div>
+        </div>
+
+        <div class="aspectRatingBarBackground">
+          <div class="bigAspectRatingBar aspectRatingBar" id="AtmosphereRating">Atmosphere: </div>
+        </div>
+
+        <div class="aspectRatingBarBackground">
+          <div class="bigAspectRatingBar aspectRatingBar" id="FacilitiesRating">Facilities: </div>
+        </div>
+        <i id="reviewNumber" class="basicMenuText"></i>
+
+      </div>
+      <div id="feedbackButtons">
+        <input type="button" id="LoveFeedbackButton" value="Love" class="FeedbackButton genericButton">
+        <input type="button" id="GoodFeedbackButton" value="Good" class="FeedbackButton genericButton">
+        <input type="button" id="LikeFeedbackButton" value="Like" class="FeedbackButton genericButton">
+        <input type="button" id="DislikeFeedbackButton" value="Dislike" class="FeedbackButton genericButton">
+        <input type="button" id="BadFeedbackButton" value="Bad" class="FeedbackButton genericButton">
+        <input type="button" id="HateFeedbackButton" value="Hate" class="FeedbackButton genericButton">
+      </div>
+      <i id="timeSinceLast" class="basicMenuText"></i>
+    </div>
+    </div>
+  </aside>
+</body>
+
+
+</html>
